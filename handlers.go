@@ -1,7 +1,6 @@
 package main
 
 import (
-	"encoding/json"
 	"math/rand"
 	"net/http"
 	"time"
@@ -9,11 +8,14 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
+func getHealth(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+	jsonResponse(w, r, http.StatusOK, nil)
+}
+
 func getJoke(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	// grab a random joke
 	rand.Seed(time.Now().UnixNano())
 	joke := jokes[rand.Intn(len(jokes))]
 
-	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(joke)
+	jsonResponse(w, r, http.StatusOK, joke)
 }

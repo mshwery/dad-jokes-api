@@ -10,6 +10,7 @@ import (
 
 func setupRouter() http.Handler {
 	router := httprouter.New()
+	router.GET("/health", getHealth)
 	router.GET("/", getJoke)
 
 	return router
