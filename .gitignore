@@ -1,0 +1,13 @@
+# Mac OS shenanigans
+.DS_Store
+
+vendor
+.env
+*.csr
+*.crt
+*.key
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
