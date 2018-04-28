@@ -12,7 +12,9 @@ import (
 func setupRouter() http.Handler {
 	router := httprouter.New()
 	router.GET("/health", getHealth)
-	router.GET("/", getJoke)
+	router.GET("/", getRandomJoke)
+	router.GET("/jokes", getRandomJoke)
+	router.GET("/jokes/:id", getJoke)
 
 	handler := cors.Default().Handler(router)
 	return handler
