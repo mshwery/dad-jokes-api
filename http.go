@@ -6,6 +6,7 @@ import (
 	"net/http"
 
 	"github.com/julienschmidt/httprouter"
+	"github.com/rs/cors"
 )
 
 func setupRouter() http.Handler {
@@ -13,11 +14,13 @@ func setupRouter() http.Handler {
 	router.GET("/health", getHealth)
 	router.GET("/", getJoke)
 
-	return router
+	handler := cors.Default().Handler(router)
+	return handler
 }
 
 func runServer() {
 	router := setupRouter()
 	fmt.Println("Server listening at http://localhost:8080")
+
 	log.Fatal(http.ListenAndServe(":8080", router))
 }
